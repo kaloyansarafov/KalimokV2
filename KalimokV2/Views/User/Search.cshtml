@@ -1,0 +1,45 @@
+﻿@model IEnumerable<KalimokV2.Models.User>
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+</head>
+<body>
+<div>
+    
+    <!--
+    search bar
+    -->
+    
+    <form asp-action="Search" method="get">
+        <div class="form-group">
+            <label for="searchString">Search</label>
+            <input type="text" class="form-control" id="searchString" name="searchString" placeholder="Search">
+        </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    @foreach (var user in Model)
+    {
+        <div>
+            <h1>
+                @user.UserName
+            </h1>
+            <p>
+                @user.Email
+            </p>
+            <p>
+                <a asp-action="Details" asp-route-id="@user.Id">Details</a>
+            </p>
+        </div>
+    }
+
+</div>
+</body>
+</html>

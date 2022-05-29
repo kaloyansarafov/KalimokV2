@@ -33,6 +33,7 @@ namespace KalimokV2.Controllers
         // GET: Dashboard/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
             if (id == null || _context.Posts == null)
             {
                 return NotFound();
