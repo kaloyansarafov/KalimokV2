@@ -12,7 +12,36 @@
 </head>
 <body>
 <div>
-      
+    
+    <div class="card row col-md-6">
+        <div class="card-header">
+            <p class="card-text">@Model.UserName</p>
+            <p class="card-text">@Model.FullName</p>
+            <p class="card-text">@Model.Email</p>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Bio</h5>
+            <p class="card-text">@Model.Bio</p>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Posts</h5>
+            @foreach (var post in Model.Posts)
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <p class="card-text">@post.Title</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">@post.Content</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="card-text">@post.CreatedAt.ToString()</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
 </div>
 </body>
 </html>

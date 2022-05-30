@@ -14,10 +14,13 @@ public class User : IdentityUser
     [MaxLength(50)]
     public string LastName { get; set; }
     
+    [MaxLength(500)]
+    public string? Bio { get; set; }
+
     [Required]
     [MaxLength(200)]
     public string AvatarUrl { get; set; }
-    
+
     [Required]
     public bool IsOnline { get; set; }
     

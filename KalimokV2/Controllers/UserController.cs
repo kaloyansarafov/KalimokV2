@@ -31,16 +31,15 @@ public class UserController : Controller
 
     public IActionResult Details(string id)
     {
-        if (id == String.Empty || id == null)
+        if (string.IsNullOrEmpty(id))
         {
             return NotFound();
         }
 
         var user = _context.Users
             .Include(a => a.Posts)
-            .Include(a => a.Comments)
-            .Include(a => a.Friendships)!
-            .ThenInclude(f => f.User2)
+            .Include(a => a.Comments)!
+            .ThenInclude(c => c.Post)
             .FirstOrDefaultAsync(x => x.Id == id).Result;
 
         return View(user);
