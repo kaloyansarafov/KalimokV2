@@ -53,6 +53,7 @@ namespace KalimokV2.Controllers
         // GET: Dashboard/Create
         public IActionResult Create()
         {
+            ViewData["CurrentUser"] = _userManager.GetUserId(User);
             ViewData["AuthorId"] = new SelectList(_context.Users, "Id", "Id");
             
             return View();

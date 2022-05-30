@@ -17,13 +17,13 @@ public class Comment
     public int PostId { get; set; }
     
     [ForeignKey("PostId")]
-    public virtual Post Post { get; set; }
+    public virtual Post? Post { get; set; }
     
     [Required]
     public string AuthorId { get; set; }
     
     [ForeignKey("AuthorId")]
-    public virtual User Author { get; set; }
+    public virtual User? Author { get; set; }
     
     [Required]
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]

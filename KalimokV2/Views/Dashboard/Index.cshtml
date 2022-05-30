@@ -38,6 +38,25 @@
                             <a asp-controller="User" asp-action="Details" asp-route-id="@item.AuthorId">User</a>
                         </div>
                     </div>
+                    @if (item.Comments != null)
+                    {
+                        foreach (var comment in item.Comments)
+                        {
+                            <div class="card-body">
+                                <p>
+                                    @comment.Content
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <div>
+                                    @Html.DisplayFor(modelItem => comment.Author.UserName) at
+                                    @Html.DisplayFor(modelItem => comment.CreatedAt)
+                                    | <a asp-action="Details" asp-route-id="@comment.Id">Details</a> |
+                                    <a asp-controller="User" asp-action="Details" asp-route-id="@comment.AuthorId">User</a>
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
                 <br/>
             }
