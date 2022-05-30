@@ -31,6 +31,12 @@ namespace KalimokV2.Areas.Identity.Pages.Account.Manage
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         public string Username { get; set; }
+        
+        public string FirstName { get; set; }
+        
+        public string LastName { get; set; }
+        
+        public string Bio { get; set; }
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -59,18 +65,36 @@ namespace KalimokV2.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+            
+            [Display(Name = "First Name")]
+            public string FirstName { get; set; }
+            
+            [Display(Name = "Last Name")]
+            public string LastName { get; set; }
+            
+            [Display(Name = "Bio")]
+            public string Bio { get; set; }
         }
 
         private async Task LoadAsync(User user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var firstName = user.FirstName;
+            var lastName = user.LastName;
+            var bio = user.Bio;
 
             Username = userName;
+            FirstName = firstName;
+            LastName = lastName;
+            Bio = bio;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FirstName = firstName,
+                LastName = lastName,
+                Bio = bio
             };
         }
 
@@ -99,8 +123,13 @@ namespace KalimokV2.Areas.Identity.Pages.Account.Manage
                 await LoadAsync(user);
                 return Page();
             }
-
+            
+            var firstName = user.FirstName;
+            var lastName = user.LastName;
+            var bio = user.Bio;
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            
+            
             if (Input.PhoneNumber != phoneNumber)
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
@@ -110,6 +139,22 @@ namespace KalimokV2.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+            if (Input.FirstName != firstName)
+            {
+                user.FirstName = Input.FirstName;
+                await _userManager.UpdateAsync(user);
+            }
+            if (Input.LastName != lastName)
+            {
+                user.LastName = Input.LastName;
+                await _userManager.UpdateAsync(user);
+            }
+            if (Input.Bio != bio)
+            {
+                user.Bio = Input.Bio;
+                await _userManager.UpdateAsync(user);
+            }
+            
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
