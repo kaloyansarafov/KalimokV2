@@ -1,0 +1,118 @@
+@model (IEnumerable<Message> sent, IEnumerable<Message> received)
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="card">
+    <table class="table col-5">
+
+        <div class="card-header">
+            Inbox
+
+            <thead>
+            <tr>
+                <th>
+                    Content
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Sender
+                </th>
+                <th>
+                    Receiver
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+        </div>
+        <div class="card-body">
+            <tbody>
+            @foreach (var item in Model.received.OrderByDescending(x => x.MessageDate))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MessageText)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MessageDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sender.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Receiver.UserName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </div>
+    </table>
+</div>
+
+
+<div class="card">
+    <table class="table col-5">
+
+        <div class="card-header">
+            Sent
+
+            <thead>
+            <tr>
+                <th>
+                    Content
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Sender
+                </th>
+                <th>
+                    Receiver
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+        </div>
+        <div class="card-body">
+            <tbody>
+            @foreach (var item in Model.sent.OrderByDescending(x => x.MessageDate))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MessageText)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MessageDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sender.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Receiver.UserName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </div>
+    </table>
+</div>
