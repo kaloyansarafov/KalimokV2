@@ -31,6 +31,11 @@
     </ItemGroup>
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Areas\Identity\Pages\Account\Register.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Comment\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Comment\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Comment\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Comment\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Comment\Index.cshtml" />
     </ItemGroup>
     <ItemGroup>
       <None Remove="Storage\images\no_profile_image.png" />

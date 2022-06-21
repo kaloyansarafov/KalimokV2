@@ -14,17 +14,19 @@ public class Message
     public string MessageText { get; set; }
     
     [Required]
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    [DataType(DataType.DateTime)]
     public DateTime MessageDate { get; set; }
     
     [Required]
     public string SenderId { get; set; }
     
     [ForeignKey("SenderId")]
-    public virtual User Sender { get; set; }
+    public virtual User? Sender { get; set; }
 
     [Required]
     public string ReceiverId { get; set; }
 
     [ForeignKey("ReceiverId")]
-    public virtual User Receiver { get; set; }
+    public virtual User? Receiver { get; set; }
 }
